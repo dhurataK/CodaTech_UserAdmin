@@ -1,0 +1,15 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<div class="container">
+      <div class="row">
+        <h3>User </h3>
+        <p><strong>First name:</strong> Dhurata</p>
+        <p><strong>Last name: </strong> Kamberi</p>
+        <p><strong>IBAN: </strong> KS5648622455775</p>
+      </div>
+      <div class="row">
+        <hr>
+        <a href="{% url 'edit_user' id=1 %}">Edit</a> || <a href="/">Back</a>
+      </div>
+    </div>
+{% endblock %}

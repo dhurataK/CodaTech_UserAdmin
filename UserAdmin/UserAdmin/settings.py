@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'home',
+    'social_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -119,3 +122,40 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+#Social app dependencies
+AUTHENTICATION_BACKENDS = (
+ 'social_core.backends.open_id.OpenIdAuth',
+ 'social_core.backends.google.GoogleOpenId',
+ 'social_core.backends.google.GoogleOAuth2',
+ 'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.debug.debug',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'social.pipeline.debug.debug',
+)
+SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE = True
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+'https://www.googleapis.com/auth/userinfo.email',
+'https://www.googleapis.com/auth/userinfo.profile'
+]
+# Google+ SignIn (google-plus)
+SOCIAL_AUTH_GOOGLE_PLUS_IGNORE_DEFAULT_SCOPE = True
+SOCIAL_AUTH_GOOGLE_PLUS_SCOPE = [
+'https://www.googleapis.com/auth/plus.login',
+'https://www.googleapis.com/auth/userinfo.email',
+'https://www.googleapis.com/auth/userinfo.profile'
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='901063267002-4gd5crve1bn86bu66rionhqfmb86kcu7.apps.googleusercontent.com'  #Paste CLient Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'WDV42lR0afciCmQufHM9t3D1' #Paste Secret Key
+
+LOGIN_URL = '/account/login/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'

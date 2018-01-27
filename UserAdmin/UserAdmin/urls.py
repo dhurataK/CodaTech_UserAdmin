@@ -19,5 +19,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include('home.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^account/', include('social_django.urls', namespace='social')),
+    url(r'^account/', include('django.contrib.auth.urls', namespace='auth')),
 
 ]
