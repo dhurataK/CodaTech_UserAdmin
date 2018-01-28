@@ -33,7 +33,7 @@ def new(request):
 def create(request):
     if request.user.is_authenticated():
         if request.POST:
-            new_client = Client.objects.create_user(request.POST, admin = request.user)
+            new_client = Client.objects.create_client(request.POST, admin = request.user)
             if new_client[0]:
                 return redirect(reverse('home'))
             else:
