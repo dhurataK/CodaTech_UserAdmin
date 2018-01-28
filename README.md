@@ -39,9 +39,10 @@ cd CodaTech_UserAdmin
 ```
 cd UserAdmin
 ```
-### Make migration
+### Make migrations
 ```
 python manage.py migrate
+python manage.py makemigrations
 ```
 ### Run the server
 ```
