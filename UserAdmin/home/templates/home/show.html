@@ -9,7 +9,12 @@
       </div>
       <div class="row">
         <hr>
-        <a href="{% url 'edit_client' id=1 %}" class="waves-effect waves-light btn">Edit</a> || <a href="/" class="waves-effect waves-light btn">Back</a>
+        {% if user.id == client.admin.id %}
+        <a href="{% url 'edit_client' id=client.id %}" class="waves-effect waves-light btn">Edit</a>
+        {% else %}
+        <td><a class="btn disabled">Edit</a></td>
+        {% endif %}
+         || <a href="/" class="waves-effect waves-light btn">Back</a>
       </div>
     </div>
 {% endblock %}

@@ -35,7 +35,6 @@ def create(request):
         if request.POST:
             new_client = Client.objects.create_user(request.POST, admin = request.user)
             if new_client[0]:
-                # request.session['user'] = new_client[1]
                 return redirect(reverse('home'))
             else:
                 for error in new_client[1]:
@@ -64,13 +63,21 @@ def edit(request,id):
 
 def update(request):
     if request.user.is_authenticated():
-        print("Update method clicked")
-        return redirect(reverse('edit_client'))
+        if request.POST:
+            client_id = request.POST['id']
+            client = Client.objects.get(id=client_id)
+            if request.user.id == client.admin.id:
+                updated_client = Client.objects.update_client(request.POST)
+                if updated_client[0]:
+                    return redirect(reverse('home'))
+                else:
+                    for error in updated_client[1]:
+                        messages.error(request, error)
+            return redirect('/edit/' + str(request.POST['id']))
 
 def delete(request,id):
     if request.user.is_authenticated():
         client = Client.objects.get(id=id)
         if request.user.id == client.admin.id:
-            # print('Inside the delete method')
             Client.objects.get(id=id).delete()
         return redirect(reverse('home'))

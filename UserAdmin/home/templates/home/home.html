@@ -25,7 +25,11 @@
           <td>{{client.last_name}}</td>
           <td>{{client.iban}}</td>
           <td><a href="/show/{{client.id}}" class="waves-effect waves-light btn green">Show</a></td>
+          {% if user.id == client.admin.id %}
           <td><a href="/edit/{{client.id}}" class="waves-effect waves-light btn blue">Edit</a></td>
+            {% else %}
+            <td><a class="btn disabled">Edit</a></td>
+          {% endif %}
           {% if user.id == client.admin.id %}
           <td><a href="/delete/{{client.id}}" class="waves-effect waves-light btn red">Remove</a></td>
             {% else %}

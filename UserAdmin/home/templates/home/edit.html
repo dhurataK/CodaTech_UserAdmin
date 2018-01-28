@@ -2,21 +2,31 @@
 {% block content %}
 <div class="container">
         <h4>Update client</h4>
+        {% if messages %}
+          <div class="row">
+            <ul>
+              {% for error in messages %}
+                <li >  {{ error }} </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
         <form class="" action="{% url 'update_client' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="first_name">First name</label>
-          <input type="text" name="first_name" class="form-control" value="{{client.first_name}}">
-        </div>
-        <div class="form-group">
-          <label for="last_name">Last name</label>
-          <input type="text" name="last_name" class="form-control" value="{{client.last_name}}">
-        </div>
-        <div class="form-group">
-          <label for="iban">IBAN</label>
-          <input type="text" name="iban" class="form-control" value="{{client.iban}}">
-        </div>
-            <button type="submit" class="waves-effect waves-light btn">Update</button> || <a class="waves-effect waves-light btn" href="/">Back</a>
+          <input type="hidden" name="id" value="{{ client.id }}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="first_name">First name</label>
+            <input type="text" name="first_name" class="form-control" value="{{client.first_name}}">
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last name</label>
+            <input type="text" name="last_name" class="form-control" value="{{client.last_name}}">
+          </div>
+          <div class="form-group">
+            <label for="iban">IBAN</label>
+            <input type="text" name="iban" class="form-control" value="{{client.iban}}">
+          </div>
+              <button type="submit" class="waves-effect waves-light btn">Update</button> || <a class="waves-effect waves-light btn" href="/">Back</a>
       </form>
     </div>
 {% endblock %}
