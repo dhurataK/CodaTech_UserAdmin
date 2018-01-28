@@ -26,7 +26,11 @@
           <td>{{client.iban}}</td>
           <td><a href="/show/{{client.id}}" class="waves-effect waves-light btn green">Show</a></td>
           <td><a href="/edit/{{client.id}}" class="waves-effect waves-light btn blue">Edit</a></td>
+          {% if user.id == client.admin.id %}
           <td><a href="/delete/{{client.id}}" class="waves-effect waves-light btn red">Remove</a></td>
+            {% else %}
+            <td><a class="btn disabled">Remove</a></td>
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>

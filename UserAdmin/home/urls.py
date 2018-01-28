@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.Home),
+    url(r'^$', views.Home, name='home'),
     url(r'^account/logout/$', views.Logout),
     url(r'^new$', views.new, name='new_user'),
     url(r'^create$', views.create, name='create_user'),

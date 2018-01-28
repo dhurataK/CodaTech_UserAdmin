@@ -12,18 +12,23 @@ from django.urls import reverse
 
 @login_required
 def Home(request):
-    context = {
-        'clients': Client.objects.all(),
-
-    }
-    return render(request, 'home/home.html',context)
+    if request.user.is_authenticated():
+        context = {
+            'clients': Client.objects.all()
+        }
+        return render(request, 'home/home.html',context)
+    else:
+        return HttpResponseRedirect('/')
 
 def Logout(request):
     logout(request)
     return HttpResponseRedirect('/')
 
 def new(request):
-    return render(request, 'home/new.html')
+    if request.user.is_authenticated():
+        return render(request, 'home/new.html')
+    else:
+        return HttpResponseRedirect('/')
 
 def create(request):
     if request.user.is_authenticated():
@@ -31,27 +36,37 @@ def create(request):
             new_client = Client.objects.create_user(request.POST, admin = request.user)
             if new_client[0]:
                 # request.session['user'] = new_client[1]
-                return redirect('/')
+                return redirect(reverse('home'))
             else:
                 for error in new_client[1]:
                     messages.error(request, error)
                     return redirect(reverse('new_user'))
 
 def show(request, id):
-    client = Client.objects.get(id=id)
-    context = {
-        'client': client,
-
-    }
-    return render(request, 'home/show.html',context)
+    if request.user.is_authenticated():
+        client = Client.objects.get(id=id)
+        context = {
+            'client': client
+        }
+        return render(request, 'home/show.html',context)
+    else:
+        return HttpResponseRedirect('/')
 
 def edit(request,id):
-    return render(request, 'home/edit.html')
+    if request.user.is_authenticated():
+        return render(request, 'home/edit.html')
+    else:
+        return HttpResponseRedirect('/')
 
 def update(request):
-    print("Update method clicked")
-    return render(request, 'home/home.html')
+    if request.user.is_authenticated():
+        print("Update method clicked")
+        return render(request, 'home/home.html')
 
 def delete(request,id):
-    print("Delete method clicked")
-    return render(request, 'home/home.html')
+    if request.user.is_authenticated():
+        client = Client.objects.get(id=id)
+        if request.user.id == client.admin.id:
+            # print('Inside the delete method')
+            Client.objects.get(id=id).delete()
+        return redirect(reverse('home'))
