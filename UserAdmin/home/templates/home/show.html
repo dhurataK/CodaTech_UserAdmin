@@ -2,14 +2,14 @@
 {% block content %}
 <div class="container">
       <div class="row">
-        <h3>User </h3>
-        <p><strong>First name:</strong> Dhurata</p>
-        <p><strong>Last name: </strong> Kamberi</p>
-        <p><strong>IBAN: </strong> KS5648622455775</p>
+        <h3>Client {{client.id}}  </h3>
+        <p><strong>First name:</strong> {{client.first_name}}</p>
+        <p><strong>Last name: </strong> {{client.last_name}}</p>
+        <p><strong>IBAN: </strong> {{client.iban}}</p>
       </div>
       <div class="row">
         <hr>
-        <a href="{% url 'edit_user' id=1 %}">Edit</a> || <a href="/">Back</a>
+        <a href="{% url 'edit_user' id=1 %}" class="waves-effect waves-light btn">Edit</a> || <a href="/" class="waves-effect waves-light btn">Back</a>
       </div>
     </div>
 {% endblock %}

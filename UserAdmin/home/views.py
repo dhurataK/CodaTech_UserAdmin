@@ -38,7 +38,12 @@ def create(request):
                     return redirect(reverse('new_user'))
 
 def show(request, id):
-    return render(request, 'home/show.html')
+    client = Client.objects.get(id=id)
+    context = {
+        'client': client,
+
+    }
+    return render(request, 'home/show.html',context)
 
 def edit(request,id):
     return render(request, 'home/edit.html')
