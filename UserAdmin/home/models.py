@@ -9,6 +9,7 @@ import re
 class ClientManager(models.Manager):
     def create_user(self, data, admin):
         errors = []
+        #validate data
         if len(data['first_name']) < 2:
             errors.append('Please enter a valid first name')
         if bool(re.search(r'\d', data['first_name'])):
@@ -19,12 +20,11 @@ class ClientManager(models.Manager):
             errors.append('Please enter a valid last name')
         if len(data['iban']) < 2:
             errors.append('Please enter a valid IBAN')
-
+        # Check if there are any errors
         if not errors:
             new_client = self.create(first_name=data['first_name'], last_name=data['last_name'], iban=data['iban'], admin=admin)
             return (True, new_client)
         else:
-            print('Tek errorat te modeli')
             return (False, errors)
 
 class Client(models.Model):

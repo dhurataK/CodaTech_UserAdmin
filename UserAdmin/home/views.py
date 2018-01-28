@@ -40,7 +40,7 @@ def create(request):
             else:
                 for error in new_client[1]:
                     messages.error(request, error)
-                    return redirect(reverse('new_user'))
+                    return redirect(reverse('new_client'))
 
 def show(request, id):
     if request.user.is_authenticated():
@@ -54,14 +54,18 @@ def show(request, id):
 
 def edit(request,id):
     if request.user.is_authenticated():
-        return render(request, 'home/edit.html')
+        client = Client.objects.get(id=id)
+        context = {
+            'client': client
+        }
+        return render(request, 'home/edit.html', context)
     else:
         return HttpResponseRedirect('/')
 
 def update(request):
     if request.user.is_authenticated():
         print("Update method clicked")
-        return render(request, 'home/home.html')
+        return redirect(reverse('edit_client'))
 
 def delete(request,id):
     if request.user.is_authenticated():

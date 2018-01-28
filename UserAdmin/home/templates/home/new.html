@@ -11,7 +11,7 @@
           </ul>
         </div>
       {% endif %}
-        <form class="" action="{% url 'create_user' %}" method="post">
+        <form class="" action="{% url 'create_client' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
           <label for="first_name">First name</label>

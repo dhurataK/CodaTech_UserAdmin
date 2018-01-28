@@ -2,19 +2,19 @@
 {% block content %}
 <div class="container">
         <h4>Update client</h4>
-        <form class="" action="{% url 'update_user' %}" method="post">
+        <form class="" action="{% url 'update_client' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
           <label for="first_name">First name</label>
-          <input type="text" name="first_name" class="form-control">
+          <input type="text" name="first_name" class="form-control" value="{{client.first_name}}">
         </div>
         <div class="form-group">
           <label for="last_name">Last name</label>
-          <input type="text" name="last_name" class="form-control">
+          <input type="text" name="last_name" class="form-control" value="{{client.last_name}}">
         </div>
         <div class="form-group">
           <label for="iban">IBAN</label>
-          <input type="text" name="iban" class="form-control">
+          <input type="text" name="iban" class="form-control" value="{{client.iban}}">
         </div>
             <button type="submit" class="waves-effect waves-light btn">Update</button> || <a class="waves-effect waves-light btn" href="/">Back</a>
       </form>
