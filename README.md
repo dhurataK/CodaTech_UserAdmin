@@ -12,20 +12,20 @@ git clone https://github.com/dhurataK/CodaTech_UserAdmin.git
 cd CodaTech_UserAdmin
 ```
 ### 3) Create a virtual environment in your virtual environment folder.
-    + If you're using Mac:
+    * If you're using Mac:
     ```
     > virtualenv djangoEnv
     ```
-    + If you're using a PC:
+    * If you're using a PC:
     ```
     > python -m virtualenv djangoEnv
     ```
 ### 4) Activate your virtual environment
-    + If you're using Mac:
+    * If you're using Mac:
     ```
     > source djangoEnv/bin/activate
     ```
-    + If you're using a PC:
+    * If you're using a PC:
     ```
     > call djangoEnv/scripts/activate
     ```
